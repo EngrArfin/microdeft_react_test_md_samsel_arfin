@@ -25,26 +25,17 @@ const Course = () => {
     setError("");
     setSuccess("");
 
-    const token = localStorage.getItem("authToken"); // Retrieve the token from localStorage
-
-    if (!token) {
-      setError("Authorization token is missing. Please log in first.");
-      return;
-    }
-
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://react-interview.crd4lc.easypanel.host/api/course",
         formData,
         {
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${token}`,
           },
         }
       );
       setSuccess("Course added successfully!");
-      console.log("Course response:", response.data);
       setFormData({
         title: "",
         description: "",
@@ -53,19 +44,20 @@ const Course = () => {
         instructor_name: "",
       });
     } catch (error) {
-      console.error("Error adding course:", error);
-      setError("Failed to add course. Please try again.");
+      setError(
+        error.response?.data?.message ||
+          "Failed to add course. Please try again."
+      );
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+    <div className="flex items-center justify-center min-h-screen bg-sky-200">
+      <div className="w-full max-w-xl bg-white rounded-lg shadow-xl p-8">
+        <h2 className="text-4xl font-bold text-center text-gray-800 mb-6">
           Add a New Course
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Title */}
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label
               htmlFor="title"
@@ -77,15 +69,13 @@ const Course = () => {
               type="text"
               name="title"
               id="title"
-              placeholder="Enter course title"
+              placeholder="Course title"
               value={formData.title}
               onChange={handleChange}
               required
-              className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
-
-          {/* Description */}
           <div>
             <label
               htmlFor="description"
@@ -96,15 +86,13 @@ const Course = () => {
             <textarea
               name="description"
               id="description"
-              placeholder="Enter course description"
+              placeholder="Course description"
               value={formData.description}
               onChange={handleChange}
               required
-              className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
-
-          {/* Badge Text */}
           <div>
             <label
               htmlFor="badge_text"
@@ -116,15 +104,12 @@ const Course = () => {
               type="text"
               name="badge_text"
               id="badge_text"
-              placeholder="Enter badge text (e.g., Featured)"
+              placeholder="Badge text"
               value={formData.badge_text}
               onChange={handleChange}
-              required
-              className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
-
-          {/* Badge Color */}
           <div>
             <label
               htmlFor="badge_color"
@@ -133,17 +118,15 @@ const Course = () => {
               Badge Color
             </label>
             <input
-              type="color"
+              type="text"
               name="badge_color"
               id="badge_color"
+              placeholder="Badge color"
               value={formData.badge_color}
               onChange={handleChange}
-              required
-              className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
-
-          {/* Instructor Name */}
           <div>
             <label
               htmlFor="instructor_name"
@@ -155,22 +138,19 @@ const Course = () => {
               type="text"
               name="instructor_name"
               id="instructor_name"
-              placeholder="Enter instructor name"
+              placeholder="Instructor's name"
               value={formData.instructor_name}
               onChange={handleChange}
-              required
-              className="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
-
           {error && <p className="text-sm text-red-500 text-center">{error}</p>}
           {success && (
             <p className="text-sm text-green-500 text-center">{success}</p>
           )}
-
           <button
             type="submit"
-            className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-300 focus:outline-none"
+            className="w-full py-3 bg-sky-500 text-white font-semibold rounded-lg hover:bg-sky-600 focus:ring-2 focus:ring-sky-300 focus:outline-none"
           >
             Add Course
           </button>

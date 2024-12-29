@@ -26,26 +26,28 @@ const Signup = () => {
     setSuccess("");
 
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://react-interview.crd4lc.easypanel.host/api/register",
         formData,
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
+        { headers: { Accept: "application/json" } }
       );
       setSuccess("Account created successfully! Redirecting...");
-      console.log("Signup successful:", response.data);
       setTimeout(() => navigate("/login"), 2000); // Redirect to login page after 2 seconds
     } catch (error) {
       console.error("Error signing up:", error);
-      setError("Failed to create account. Please try again.");
+      if (error.response) {
+        setError(
+          error.response.data.message ||
+            "Failed to create account. Please try again."
+        );
+      } else {
+        setError("Network error. Please try again.");
+      }
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen  bg-blue-200">
+    <div className="flex items-center justify-center min-h-screen bg-blue-200">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Create an Account

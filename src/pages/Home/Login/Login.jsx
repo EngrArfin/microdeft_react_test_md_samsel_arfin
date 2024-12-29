@@ -25,18 +25,26 @@ const Login = () => {
       const response = await axios.post(
         "https://react-interview.crd4lc.easypanel.host/api/login",
         formData,
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
+        { headers: { Accept: "application/json" } }
       );
+
       const { token } = response.data;
-      localStorage.setItem("authToken", token);
-      console.log("Login successful! Token:", token);
+
+      if (token) {
+        // Save token to localStorage
+        localStorage.setItem("authToken", token);
+        console.log("Token saved to localStorage:", token);
+        navigate("/"); // Redirect to dashboard after successful login
+      } else {
+        setError("No token returned. Please try again.");
+      }
     } catch (error) {
       console.error("Error logging in:", error);
-      setError("Invalid email or password");
+      if (error.response) {
+        setError(error.response.data.message || "Invalid email or password");
+      } else {
+        setError("Network error. Please try again.");
+      }
     }
   };
 
@@ -45,7 +53,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen  bg-blue-200 ">
+    <div className="flex items-center justify-center min-h-screen bg-blue-200">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Welcome Back
@@ -100,7 +108,7 @@ const Login = () => {
         </form>
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
-            i have no account?{" "}
+            Don’t have an account?{" "}
             <button
               onClick={goToSignup}
               className="font-medium text-sky-500 hover:underline focus:outline-none"

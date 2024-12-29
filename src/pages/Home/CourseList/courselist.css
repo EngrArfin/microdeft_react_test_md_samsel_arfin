@@ -1,94 +1,149 @@
-/* General Body Styling */
-body {
-  font-family: Arial, sans-serif; /* Set a clean font */
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f9; /* Light background */
-}
-
-/* Main container for the course list */
+/* Container for the whole course list */
 .course-list {
-  padding: 20px;
-  max-width: 1200px; /* Restrict width for better alignment */
-  margin: 0 auto;
+  padding: 3rem;
+  background: linear-gradient(135deg, #f0f4f8, #e0e7ff);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Title styling */
 .title {
-  font-size: 2.5rem; /* Larger font for emphasis */
-  color: #333;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #2c3e50;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 /* Error message styling */
 .error {
-  color: red;
+  color: #e74c3c;
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  max-width: 800px;
 }
 
-/* Card container for responsive layout */
+/* Card container styling */
 .card-container {
-  display: grid; /* Use grid layout for responsive design */
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(300px, 1fr)
-  ); /* Adjust based on screen size */
-  gap: 20px; /* Add space between cards */
-  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-/* Individual card styling */
+/* Individual course card styling */
 .card {
-  background-color: #ffffff; /* White background for cards */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  overflow: hidden;
-  padding: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-/* Hover effect for the card */
 .card:hover {
-  transform: translateY(-10px); /* Moves the card up */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adds a stronger shadow */
+  transform: translateY(-10px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
-/* Badge for each card */
+/* Badge styling */
 .badge {
-  position: absolute; /* Place badge on top-left */
-  top: 15px;
-  left: 15px;
-  padding: 5px 10px;
-  font-size: 0.9rem;
-  color: white;
-  border-radius: 5px;
-}
-
-/* Card title styling */
-.card-title {
-  font-size: 1.5rem;
-  color: #333;
-  margin: 15px 0;
-}
-
-/* Card description styling */
-.card-description {
+  display: inline-block;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  color: #666;
-  margin-bottom: 15px;
-  line-height: 1.6;
+  color: #fff;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
 }
 
-/* Instructor details */
+/* Title and description styles */
+.card-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 0.75rem;
+}
+
+.card-description {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  max-height: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Instructor information */
 .card-instructor {
-  font-size: 0.9rem;
-  color: #555;
+  font-size: 1rem;
+  color: #34495e;
+  font-weight: 500;
 }
 
 .card-instructor span {
-  font-weight: bold;
-  color: #000;
+  color: #3498db;
+  font-weight: 600;
+}
+
+/* Message when no courses are available */
+.no-courses {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #7f8c8d;
+  font-weight: 500;
+  margin-top: 2rem;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .card-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-container {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .card {
+    padding: 1.2rem;
+  }
+
+  .card-title {
+    font-size: 1.4rem;
+  }
+
+  .card-description {
+    font-size: 1rem;
+  }
 }
