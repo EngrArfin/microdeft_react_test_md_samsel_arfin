@@ -1,7 +1,13 @@
+import Course from "../../pages/Home/Course/Course";
+import CourseList from "../../pages/Home/CourseList/CourseList";
+import NavBar from "../../pages/Home/Shared/NavBar";
+
 const Landing = () => {
   return (
-    <div className="flex justify-center align-center text-4xl items-center text-sky-900">
-      <h1>Welcome to Job Tast For microdeft!</h1>
+    <div className="">
+      <NavBar />
+      <Course />
+      <CourseList />
     </div>
   );
 };

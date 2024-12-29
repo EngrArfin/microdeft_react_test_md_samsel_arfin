@@ -1,0 +1,94 @@
+/* General Body Styling */
+body {
+  font-family: Arial, sans-serif; /* Set a clean font */
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9; /* Light background */
+}
+
+/* Main container for the course list */
+.course-list {
+  padding: 20px;
+  max-width: 1200px; /* Restrict width for better alignment */
+  margin: 0 auto;
+}
+
+/* Title styling */
+.title {
+  font-size: 2.5rem; /* Larger font for emphasis */
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Error message styling */
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Card container for responsive layout */
+.card-container {
+  display: grid; /* Use grid layout for responsive design */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Adjust based on screen size */
+  gap: 20px; /* Add space between cards */
+  padding: 10px;
+}
+
+/* Individual card styling */
+.card {
+  background-color: #ffffff; /* White background for cards */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  overflow: hidden;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  position: relative;
+}
+
+/* Hover effect for the card */
+.card:hover {
+  transform: translateY(-10px); /* Moves the card up */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adds a stronger shadow */
+}
+
+/* Badge for each card */
+.badge {
+  position: absolute; /* Place badge on top-left */
+  top: 15px;
+  left: 15px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  color: white;
+  border-radius: 5px;
+}
+
+/* Card title styling */
+.card-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 15px 0;
+}
+
+/* Card description styling */
+.card-description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+/* Instructor details */
+.card-instructor {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.card-instructor span {
+  font-weight: bold;
+  color: #000;
+}

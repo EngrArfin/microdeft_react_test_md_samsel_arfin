@@ -1,17 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-  // State for form data (email, password)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  // State for handling error messages
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  // Handle input changes and update state
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -19,12 +18,10 @@ const Login = () => {
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Send POST request to login API with form data
       const response = await axios.post(
         "https://react-interview.crd4lc.easypanel.host/api/login",
         formData,
@@ -34,51 +31,85 @@ const Login = () => {
           },
         }
       );
-      // Store token for further authentication
       const { token } = response.data;
-      localStorage.setItem("authToken", token); // Store token in localStorage or in a state management system like Redux
+      localStorage.setItem("authToken", token);
       console.log("Login successful! Token:", token);
-      // Optionally handle successful login (e.g., redirect to dashboard)
     } catch (error) {
       console.error("Error logging in:", error);
       setError("Invalid email or password");
     }
   };
 
+  const goToSignup = () => {
+    navigate("/signup");
+  };
+
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Login to Your Account</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Email Input Field */}
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          className="w-full p-3 mb-3 border border-gray-300 rounded-md"
-        />
-        {/* Password Input Field */}
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter your password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-          className="w-full p-3 mb-4 border border-gray-300 rounded-md"
-        />
-        {/* Display error if login fails */}
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        >
-          Login
-        </button>
-      </form>
+    <div className="flex items-center justify-center min-h-screen  bg-blue-200 ">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          Welcome Back
+        </h2>
+        <p className="text-center text-gray-600 mb-8">
+          Login to access your account
+        </p>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email Address
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          {error && <p className="text-sm text-red-500 text-center">{error}</p>}
+          <button
+            type="submit"
+            className="w-full py-3 bg-sky-500 text-white font-semibold rounded-lg hover:bg-sky-600 focus:ring-2 focus:ring-blue-300 focus:outline-none"
+          >
+            Login
+          </button>
+        </form>
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-600">
+            i have no account?{" "}
+            <button
+              onClick={goToSignup}
+              className="font-medium text-sky-500 hover:underline focus:outline-none"
+            >
+              Sign Up
+            </button>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
