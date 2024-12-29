@@ -20,7 +20,9 @@ Clone the repository to your local machine using the following command:
 ```bash
 git clone https://github.com/your-username/microdeft_react_test_md_samsel_arfin.git
 cd microdeft_react_test_md_samsel_arfin
+```
 
 ```bash
 npm i
+```
 
